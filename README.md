@@ -3,7 +3,7 @@
 WasteWise is a responsive web application designed for campus and community waste diversion, combining tactile modernism and precision ecological intelligence.
 
 ---
-https://waste-wise-ruby.vercel.app/
+[https://waste-wise-ruby.vercel.app/](http://localhost:5173/matterlens)
 
 ## Gemma Model Integration
 
