@@ -155,3 +155,25 @@ npm run build
 - **No Client Credential Exposure**: `GEMINI_API_KEY` is loaded strictly on the server-side Vite gateway and is never bundled in frontend assets.
 - **Server-Side Validation**: Magic byte inspection prevents arbitrary file type spoofing.
 - **Scope Demarcation**: Optical material classification is clearly separated from municipal recycling validation (EcoVerify).
+
+  Contributing
+
+Contributions are welcome once repository ownership and contribution guidelines are established.
+
+Fork the repository.
+
+Create a feature branch.
+
+Implement and test the change.
+
+Document new environment variables and API integrations.
+
+Open a pull request describing the change and its verification steps.
+
+Do not submit API keys, private user data, or unverified municipal guidance.
+
+License
+
+No license has been specified here. Add a LICENSE file only after choosing the terms under which the project may be used, modified, and redistributed.
+
+WasteWise — making better waste decisions easier through AI, local knowledge, and circular thinking.
