@@ -177,3 +177,20 @@ License
 No license has been specified here. Add a LICENSE file only after choosing the terms under which the project may be used, modified, and redistributed.
 
 WasteWise — making better waste decisions easier through AI, local knowledge, and circular thinking.
+
+Why WasteWise?
+
+WasteWise is built around a simple principle: better waste decisions start with better information.
+
+By combining image-based material recognition, local recycling guidance, circular reuse pathways, and personal activity tracking, WasteWise aims to make sustainable choices more understandable and actionable.
+
+Identify what you have. Understand your options. Choose a better next step.
+
+<p align="center">
+  <strong>WasteWise 🌱 — Turning waste awareness into circular action.</strong>
+</p>
+
+<p align="center">
+  <a href="https://waste-wise-ruby.vercel.app/">Explore WasteWise</a> ·
+  <a href="https://github.com/RAKSHIT-0511/WasteWise">View Source Code</a>
+</p>
