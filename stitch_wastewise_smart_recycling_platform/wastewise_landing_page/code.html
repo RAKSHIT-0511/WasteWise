@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-tint": "#2e6a41", "primary-container": "#14532d", "tertiary-container": "#335000", "on-secondary-fixed": "#002109", "error": "#ba1a1a", "surface-container-low": "#f2f3ff", "tertiary": "#223800", "on-primary-fixed-variant": "#12512c", "outline-variant": "#c0c9be", "secondary-fixed": "#7ffc97", "secondary-container": "#7cf994", "surface-container-highest": "#dae2fd", "secondary": "#006e2d", "on-secondary": "#ffffff", "primary-fixed": "#b1f2be", "on-error": "#ffffff", "on-primary-fixed": "#00210d", "background": "#faf8ff", "surface-container": "#eaedff", "on-tertiary-container": "#89c90f", "primary-fixed-dim": "#96d5a3", "outline": "#717970", "error-container": "#ffdad6", "on-primary": "#ffffff", "surface-container-high": "#e2e7ff", "inverse-on-surface": "#eef0ff", "on-background": "#131b2e", "surface-variant": "#dae2fd", "on-surface-variant": "#404941", "on-surface": "#131b2e", "tertiary-fixed-dim": "#98da27", "on-secondary-fixed-variant": "#005320", "surface": "#faf8ff", "on-tertiary-fixed-variant": "#334f00", "on-tertiary-fixed": "#121f00", "on-secondary-container": "#007230", "surface-dim": "#d2d9f4", "primary": "#003b1b", "on-error-container": "#93000a", "secondary-fixed-dim": "#62df7d", "on-tertiary": "#ffffff", "surface-bright": "#faf8ff", "surface-container-lowest": "#ffffff", "inverse-surface": "#283044", "on-primary-container": "#87c695", "inverse-primary": "#96d5a3", "tertiary-fixed": "#b2f746" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-2xl": "3rem", "space-xs": "0.5rem", "space-3xl": "4.5rem", "margin-desktop": "3rem", "margin-mobile": "1rem", "gutter-desktop": "1.5rem", "gutter-mobile": "1rem", "margin-tablet": "2rem", "space-md": "1rem", "space-xxs": "0.25rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-sm": "0.75rem" }, fontFamily: { "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "label-numeric": ["Space Grotesk"], "body-md": ["Manrope"], "headline-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-sm": ["Manrope"], "body-lg": ["Manrope"], "caption": ["Manrope"], "display-hero-mobile": ["Plus Jakarta Sans"], "label-pill": ["Space Grotesk"], "headline-xl-mobile": ["Plus Jakarta Sans"], "display-hero": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"] }, fontSize: { "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-numeric": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "600" }], "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "400" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "caption": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }], "display-hero-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-pill": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 inset-x-0 z-50 bg-surface/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"><img alt="WasteWise Vector Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1X1X-I7SqVbRH5yTbzzFGe2nUbp5fMqgMHYRoLl6K85jlnUlwmO9wB5jUemrWUFAyg7gdGjC66ELmHaM_o2Btu5a6n8diQ-SbdqzhKXB4hJLdU7FX5BWsuH7hMqm24QBPtKYIJObqLIyG5pE6wuRQuX_GRQ7w379JzS8d702mwA1lv4m-TtvHgvKtqr7GvB8kzkEfUZKux8LpCDuDWs9AyiaVCRSLuZCV4AepmKLBTlnJpvxJboQ57RN7s"/><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">WasteWise</span></div><div class="flex items-center gap-space-xs"><div class="inline-flex items-center gap-space-xxs px-space-xs py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-pill text-label-pill uppercase"><span class="material-symbols-outlined text-[14px] leading-none text-secondary">eco</span><span>Level 4</span></div><button aria-label="Notifications" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface"></span></button><div class="flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtFE7mwqa8BCEG0zfSmlkO7IL0Ks45DmXf7aqXWsoY7nl2sutwC0SKkHKnG4-HWcDjieM90M89kVYFXmF_kKsCvVu0yU8SRPVNtOJVU8_WwIR9nuc4Is9xcGtSlPVqK5Un_K502aBwsHcsnsNEAstdnVNhDs6fUaharJMNal7_NnLc7ZlYd3jX7hGuO9RjgqhV2pLJW5rZLmYr2ABE7WjtwV03_s_lnE9sPNi0PVGHt-CDBBmM5DuS"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow in Background (Inline SVG) -->
+<div class="relative w-full overflow-hidden px-margin-mobile pt-space-md pb-space-2xl space-y-space-xl">
+<!-- Decorative Ambient Blur Blob -->
+<div class="absolute -top-12 -right-12 w-64 h-64 bg-secondary-fixed/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-96 -left-16 w-60 h-60 bg-surface-container-highest/60 rounded-full blur-2xl pointer-events-none -z-10"></div>
+<!-- 1. HERO SECTION -->
+<section class="flex flex-col items-start gap-space-md">
+<!-- Tagline Pill -->
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-label-pill text-label-pill uppercase shadow-sm">
+<span class="material-symbols-outlined text-[15px] leading-none" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>AI-Powered Waste Intelligence</span>
+</div>
+<!-- Main Headline -->
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-primary tracking-tight">
+        Give Your Waste a <span class="text-secondary underline decoration-secondary-fixed decoration-4 underline-offset-4">Second Life</span>.
+      </h1>
+<!-- Subheadline -->
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        Identify, segregate, and recycle smarter with instant camera detection and hyper-local disposal instructions.
+      </p>
+<!-- CTA Action Stack -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center w-full gap-space-xs pt-space-xs">
+<a class="inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-headline-sm text-headline-sm px-6 py-3.5 rounded-full shadow-[0_8px_20px_rgba(20,83,45,0.25)] active:scale-95 transition-all" href="#scan-demo">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+<span>Scan Your Waste</span>
+</a>
+<a class="inline-flex items-center justify-center gap-space-xs bg-surface-container-low text-secondary font-headline-sm text-headline-sm px-6 py-3.5 rounded-full shadow-sm hover:bg-surface-container active:scale-95 transition-all" href="#process">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span>Explore How It Works</span>
+</a>
+</div>
+<!-- Live AI Detection Preview Interactive Card -->
+<div class="w-full relative mt-space-sm rounded-lg overflow-hidden bg-surface-container-lowest shadow-[0_4px_24px_rgba(20,83,45,0.08)]" id="scan-demo">
+<!-- Bottle Preview Image with Simulated Lens Feed -->
+<div class="relative w-full h-72 overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="High quality overhead photograph of a clear transparent recyclable PET plastic water bottle on a clean pale concrete surface, bright soft daylight studio lighting, precision composition, eco-tech aesthetics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAk_BOpnjsBS0aQLPSbwydEP75NzV096_LpAtdI5zmTjRIW2KuLzynIzLEscXAuRvgoFCJhhPoI-08gakB6_H6LUoAaRnRDzYmQPaAGGSZHoVcx5JXvDfkEnqhYu1p9gMI2Uf8vauJqKHwsAAQKiGGpwvGLT-0uT9tF6I-1XFvYogJ9BgqCN2wgWY83Iu5okkw4bjYj-grRAba7tgzEX3JUJuRP-r9_yKhsMRnYTgi2iOmal77mWF8"/>
+<!-- AR Detection Grid Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent flex flex-col justify-between p-space-md">
+<!-- Top Camera Status Bar -->
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-on-surface font-label-numeric text-label-numeric">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span>VISION v4.2 LIVE</span>
+</span>
+<span class="p-1.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-primary">
+<span class="material-symbols-outlined text-[18px]">center_focus_strong</span>
+</span>
+</div>
+<!-- AI Bounding Box Graphic -->
+<div class="relative mx-auto my-auto w-44 h-44 rounded-2xl flex items-center justify-center shadow-inner">
+<!-- Bounding Corner Brackets -->
+<div class="absolute -top-1 -left-1 w-5 h-5 bg-secondary-fixed rounded-tl-lg"></div>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-secondary-fixed rounded-tr-lg"></div>
+<div class="absolute -bottom-1 -left-1 w-5 h-5 bg-secondary-fixed rounded-bl-lg"></div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-secondary-fixed rounded-br-lg"></div>
+<!-- Scanning Pulse Line -->
+<div class="w-full h-0.5 bg-secondary-fixed shadow-[0_0_12px_#7ffc97] opacity-80 animate-bounce"></div>
+</div>
+<!-- Recognition Floating Pill Tag -->
+<div class="bg-surface-container-lowest/95 backdrop-blur-lg rounded-DEFAULT p-space-sm shadow-md flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]">recycling</span>
+</div>
+<div class="min-w-0">
+<p class="font-headline-sm text-headline-sm text-primary truncate leading-tight">Recyclable PET (Cat. 1)</p>
+<p class="font-caption text-caption text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">verified</span> Bin: Yellow Recyclables
+                  </p>
+</div>
+</div>
+<span class="font-label-numeric text-label-numeric font-bold text-secondary bg-secondary-fixed/40 px-2.5 py-1 rounded-full whitespace-nowrap">
+                98.4%
+              </span>
+</div>
+</div>
+</div>
+<!-- Micro Prep Banner beneath scanner preview -->
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">water_drop</span>
+<span class="font-caption text-caption text-on-surface-variant">Rinse clean &amp; compress to save bin space.</span>
+</div>
+<span class="font-label-pill text-label-pill text-secondary font-bold uppercase tracking-wider">+15 EcoPts</span>
+</div>
+</div>
+</section>
+<!-- 2. THREE-STEP PROCESS SECTION -->
+<section class="flex flex-col gap-space-md" id="process">
+<div class="flex flex-col gap-space-xxs">
+<span class="font-label-pill text-label-pill text-secondary uppercase tracking-wider">Effortless Action</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Scan → Segregate → Sustain</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Three quick steps from confusion to verified municipal diversion.</p>
+</div>
+<!-- Step Cards Container -->
+<div class="flex flex-col gap-space-sm">
+<!-- Step 1 -->
+<div class="flex items-start gap-space-md p-space-md rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0 text-on-primary-fixed font-headline-sm text-headline-sm font-bold shadow-sm">
+            1
+          </div>
+<div class="flex flex-col gap-0.5 min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">camera</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Snap or Upload</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+              Point your smartphone at any consumer container, packaging scrap, compost scrap, or broken electronic.
+            </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start gap-space-md p-space-md rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center flex-shrink-0 text-on-secondary-fixed font-headline-sm text-headline-sm font-bold shadow-sm">
+            2
+          </div>
+<div class="flex flex-col gap-0.5 min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">checklist</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Instant Guidance &amp; Prep</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+              Get immediate color-coded bin classification, cap-removal reminders, and contamination-prevention steps.
+            </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start gap-space-md p-space-md rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center flex-shrink-0 text-on-tertiary-fixed font-headline-sm text-headline-sm font-bold shadow-sm">
+            3
+          </div>
+<div class="flex flex-col gap-0.5 min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-secondary">military_tech</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Divert &amp; Earn Eco-Points</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-snug">
+              Safely divert landfill tons, log verifiable carbon offsets, and level up your sustainable living badge.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. BENEFIT CARDS -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col gap-space-xxs">
+<span class="font-label-pill text-label-pill text-secondary uppercase tracking-wider">Engineered Features</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Built for Modern Waste Streams</h2>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Feature 1: AI Vision -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">visibility</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Sub-Second AI Detection</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Trained on millions of waste artifacts: multilayer foils, clear versus opaque resin, compostable bioplastics, and battery terminals.
+            </p>
+</div>
+<div class="p-space-xs rounded-DEFAULT bg-surface-container-low flex items-center justify-between">
+<span class="font-caption text-caption text-on-surface-variant">Classification Latency</span>
+<span class="font-label-numeric text-label-numeric font-bold text-secondary">~320ms</span>
+</div>
+</div>
+<!-- Feature 2: Smart Guidance -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">delete_sweep</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Smart Disposal Guidance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Geo-referenced municipal rules adapt bin instructions dynamically based on local county sorting capabilities and haulers.
+            </p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-pill text-label-pill">Compost</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-pill text-label-pill">Blue Bin</span>
+<span class="px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-pill text-label-pill">E-Waste Drop</span>
+</div>
+</div>
+<!-- Feature 3: Environmental Tracking -->
+<div class="p-space-lg rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed-dim/40 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[24px]">query_stats</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Environmental Impact Tracking</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Calculate cumulative greenhouse gas offset, log kilogram-diverted records, and benchmark your progress on campus leaderboards.
+            </p>
+</div>
+<div class="flex items-center gap-2 text-secondary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span>Zero-Contamination Streak: 14 Days</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. LIVE IMPACT METRICS (DEMO STATS) -->
+<section class="rounded-xl bg-primary text-on-primary p-space-lg shadow-lg relative overflow-hidden flex flex-col gap-space-md">
+<!-- Watermark Background Decal -->
+<div class="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[160px]">eco</span>
+</div>
+<div class="flex items-center justify-between z-10">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed animate-ping"></span>
+<span class="font-label-pill text-label-pill tracking-widest uppercase text-secondary-fixed font-bold">Community Telemetry</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-on-primary/10 text-on-primary font-caption text-caption">Verified Demo Statistics</span>
+</div>
+<!-- Stat Cards Grid -->
+<div class="grid grid-cols-1 gap-space-sm z-10">
+<!-- Metric 1 -->
+<div class="p-space-md rounded-DEFAULT bg-primary-container text-on-primary flex items-center justify-between">
+<div>
+<p class="font-display-hero-mobile text-display-hero-mobile font-bold text-secondary-fixed tracking-tight">124,580+</p>
+<p class="font-body-sm text-body-sm text-on-primary-container font-medium">Items Classified &amp; Analyzed</p>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed text-[32px] opacity-80">document_scanner</span>
+</div>
+<!-- Metric 2 -->
+<div class="p-space-md rounded-DEFAULT bg-primary-container text-on-primary flex items-center justify-between">
+<div>
+<p class="font-display-hero-mobile text-display-hero-mobile font-bold text-primary-fixed tracking-tight">48.2 Tons</p>
+<p class="font-body-sm text-body-sm text-on-primary-container font-medium">Waste Diverted from Landfills</p>
+</div>
+<span class="material-symbols-outlined text-primary-fixed text-[32px] opacity-80">compost</span>
+</div>
+<!-- Metric 3 -->
+<div class="p-space-md rounded-DEFAULT bg-primary-container text-on-primary flex items-center justify-between">
+<div>
+<p class="font-display-hero-mobile text-display-hero-mobile font-bold text-tertiary-fixed tracking-tight">89.6%</p>
+<p class="font-body-sm text-body-sm text-on-primary-container font-medium">Segregation Accuracy Rate</p>
+</div>
+<span class="material-symbols-outlined text-tertiary-fixed text-[32px] opacity-80">task_alt</span>
+</div>
+</div>
+<!-- Diversion Rate Mini Progress Meter -->
+<div class="pt-space-xs z-10 flex flex-col gap-1.5">
+<div class="flex justify-between items-center font-caption text-caption text-on-primary-container">
+<span>Global Campus Zero-Waste Goal</span>
+<span class="text-secondary-fixed font-bold">89.6% / 95.0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-primary-container overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-secondary-fixed rounded-full w-[89.6%]"></div>
+</div>
+</div>
+</section>
+<!-- 5. BOTTOM CTA BANNER -->
+<section class="rounded-xl bg-surface-container p-space-lg text-center flex flex-col items-center gap-space-md shadow-sm">
+<div class="w-14 h-14 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed shadow-md">
+<span class="material-symbols-outlined text-[32px]">nest_eco_leaf</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Start Your Zero-Waste Journey Today</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mx-auto">
+          Join thousands making a measurable micro-impact with every single toss. Free for individuals and neighborhood champions.
+        </p>
+</div>
+<button class="w-full max-w-xs inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary font-headline-sm text-headline-sm px-8 py-3.5 rounded-full shadow-[0_8px_20px_rgba(20,83,45,0.25)] active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[22px]">rocket_launch</span>
+<span>Get Started Free</span>
+</button>
+<span class="font-caption text-caption text-on-surface-variant flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">lock</span> No subscription required • Works directly in mobile browser
+      </span>
+</section>
+<!-- 6. FOOTER NAVIGATION LINKS -->
+<footer class="pt-space-md pb-space-lg flex flex-col items-center gap-space-md">
+<div class="flex flex-wrap justify-center items-center gap-x-space-md gap-y-space-xs">
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#about">About</a>
+<span class="text-outline-variant text-[10px]">•</span>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#campus">Campus Programs</a>
+<span class="text-outline-variant text-[10px]">•</span>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#facilities">Recycling Facilities</a>
+<span class="text-outline-variant text-[10px]">•</span>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary transition-colors" href="#privacy">Privacy &amp; Terms</a>
+</div>
+<div class="flex items-center gap-1.5 font-caption text-caption text-on-surface-variant/80">
+<span class="material-symbols-outlined text-[14px] text-secondary">public</span>
+<span>© 2025 WasteWise Inc. Powered by Ethical Computer Vision.</span>
+</div>
+</footer>
+</div>
+</div>
+<script>
+  // Micro-interaction for clicking the Scan CTA to scroll smoothly
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+  });
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-4px_20px_rgba(20,83,45,0.06)]" data-active-classes="text-secondary font-semibold"><div class="relative flex justify-around items-center h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 transition-colors text-secondary font-semibold" data-path="home" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-caption text-caption mt-0.5">Home</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[24px]">grid_view</span><span class="font-caption text-caption mt-0.5">Dashboard</span></a><div class="relative -top-5 flex flex-col items-center"><a aria-label="Scan Item" class="w-14 h-14 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-[0_8px_20px_rgba(20,83,45,0.35)] active:scale-95 transition-transform" data-path="scan" href="#"><span class="material-symbols-outlined text-[28px] text-secondary-fixed">photo_camera</span></a><span class="font-caption text-caption text-on-surface-variant font-medium mt-1">Scan</span></div><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="guide" href="#"><span class="material-symbols-outlined text-[24px]">menu_book</span><span class="font-caption text-caption mt-0.5">Guide</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact" href="#"><span class="material-symbols-outlined text-[24px]">nest_eco_leaf</span><span class="font-caption text-caption mt-0.5">Impact</span></a></div></nav></body></html>

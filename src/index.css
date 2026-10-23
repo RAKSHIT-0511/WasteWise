@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #faf8ff;
+    color: #131b2e;
+  }
+  
+  body {
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 83, 45, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(20, 83, 45, 0.3);
+}
+
+/* Warm, paper-like canvas for the recycling dashboard. */
+@layer base {
+  html,
+  body {
+    background-color: #f5f6ef;
+  }
+}
+
+.dashboard-canvas {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(189, 224, 184, 0.22), transparent 34rem),
+    #f5f6ef;
+}
+
+.dashboard-hero {
+  background: linear-gradient(125deg, #103d2a 0%, #18563a 58%, #39734a 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 55px rgba(17, 61, 42, 0.15);
+}
+
+.dashboard-hero-copy {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.dashboard-hero-title {
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  max-width: 15ch;
+}
+
+.dashboard-hero-tag {
+  background: rgba(190, 242, 198, 0.13);
+  color: #d5f4d9;
+  border: 1px solid rgba(213, 244, 217, 0.2);
+}
+
+.dashboard-hero-primary {
+  background: #c8f0c9;
+  color: #123e2a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.dashboard-hero-primary:hover {
+  background: #e0f7dd;
+}
+
+.dashboard-hero-secondary {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.dashboard-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dashboard-hero-image {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-tool-card,
+.dashboard-info-card {
+  box-shadow: 0 3px 14px rgba(31, 54, 36, 0.045);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.dashboard-feature-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dashboard-feature-image img {
+  transition: transform 350ms ease;
+}
+
+.dashboard-tool-card:hover .dashboard-feature-image img {
+  transform: scale(1.04);
+}
+
+.dashboard-feature-action {
+  white-space: nowrap;
+}
+
+.app-sidebar-nav {
+  position: fixed;
+  z-index: 45;
+  top: 5rem;
+  bottom: 0;
+  left: 0;
+  width: 15rem;
+  padding: 1.5rem 1rem;
+  background: rgba(255, 255, 255, 0.94);
+  border-right: 1px solid rgba(30, 74, 47, 0.1);
+  box-shadow: 8px 0 30px rgba(32, 57, 38, 0.035);
+  backdrop-filter: blur(18px);
+}
+
+.app-sidebar-nav > a {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.85rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.app-sidebar-nav > a[aria-current="page"] {
+  background: #174d33;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(23, 77, 51, 0.16);
+}
+
+.app-sidebar-nav > a[aria-current="page"] svg,
+.app-sidebar-nav > a[aria-current="page"] .material-symbols-outlined {
+  color: #c8f0c9;
+}
+
+.app-sidebar-nav > a:not([aria-current="page"]):hover {
+  background: #f1f5ed;
+  color: #174d33;
+}
+
+.app-main {
+  margin-left: 15rem;
+  width: calc(100% - 15rem);
+}
+
+@media (max-width: 767px) {
+  .app-sidebar-nav {
+    width: 4rem;
+    padding: 1rem 0.35rem;
+    align-items: center;
+  }
+
+  .app-sidebar-nav > a {
+    width: 3rem;
+    min-height: 3rem;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+    border-radius: 1rem;
+  }
+
+  .app-sidebar-nav > a > span:last-child {
+    display: none;
+  }
+
+  .app-sidebar-nav > a svg,
+  .app-sidebar-nav > a .material-symbols-outlined {
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  .app-main {
+    margin-left: 4rem;
+    width: calc(100% - 4rem);
+  }
+}
+
+.dashboard-tool-card:hover,
+.dashboard-info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(31, 54, 36, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-tool-card,
+  .dashboard-info-card {
+    transition: none;
+  }
+}
