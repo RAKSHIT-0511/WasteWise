@@ -318,46 +318,16 @@ export function getNextWorthRuleRecommendation(
 }
 
 // Server gateway handler
-export async function handleNextWorth(req: IncomingMessage, res: ServerResponse): Promise<void> {
-  if (req.method !== 'POST') {
-    res.statusCode = 405;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ success: false, error: 'Method not allowed. Use POST.' }));
-    return;
-  }
-
-  let bodyStr = '';
-  for await (const chunk of req) {
-    bodyStr += chunk;
-    if (bodyStr.length > 256 * 1024) {
-      res.statusCode = 413;
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({ success: false, error: 'Payload exceeds 256KB limit.' }));
-      return;
-    }
-  }
-
-  let body: { itemName?: string; category?: string; condition?: string; imageBase64?: string };
-  try {
-    body = JSON.parse(bodyStr);
-  } catch {
-    res.statusCode = 400;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ success: false, error: 'Malformed JSON payload.' }));
-    return;
-  }
-
-  const itemName = (body.itemName || '').trim();
-  const category = (body.category || 'General').trim();
-  const condition = (body.condition || 'Good / gently used').trim();
-
-  if (!itemName) {
-    res.statusCode = 400;
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ success: false, error: 'Item name is required.' }));
-    return;
-  }
-
+/**
+ * Transport-free recommendation pipeline: try Gemma when a key is configured,
+ * otherwise fall back to the circular hierarchy rule engine. Shared by the Vite
+ * dev middleware and the Vercel serverless function.
+ */
+export async function getNextWorthRecommendation(
+  itemName: string,
+  category = 'General',
+  condition = 'Good / gently used'
+): Promise<NextWorthRecommendation> {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
   const model = process.env.GEMMA_MODEL || 'gemma-4-26b-a4b-it';
 
@@ -410,7 +380,7 @@ Respond with ONLY raw JSON matching this schema:
         if (text) {
           const parsed = JSON.parse(text);
           if (parsed.bestNextStep && Array.isArray(parsed.otherOptions)) {
-            const recommendation: NextWorthRecommendation = {
+            return {
               itemName,
               category,
               condition,
@@ -421,10 +391,6 @@ Respond with ONLY raw JSON matching this schema:
               source: 'ai_model',
               generatedAt: new Date().toISOString(),
             };
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ success: true, data: recommendation }));
-            return;
           }
         }
       }
@@ -434,8 +400,52 @@ Respond with ONLY raw JSON matching this schema:
   }
 
   // Graceful rule-based fallback
-  const fallbackRec = getNextWorthRuleRecommendation(itemName, category, condition);
+  return getNextWorthRuleRecommendation(itemName, category, condition);
+}
+
+export async function handleNextWorth(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  if (req.method !== 'POST') {
+    res.statusCode = 405;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ success: false, error: 'Method not allowed. Use POST.' }));
+    return;
+  }
+
+  let bodyStr = '';
+  for await (const chunk of req) {
+    bodyStr += chunk;
+    if (bodyStr.length > 256 * 1024) {
+      res.statusCode = 413;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify({ success: false, error: 'Payload exceeds 256KB limit.' }));
+      return;
+    }
+  }
+
+  let body: { itemName?: string; category?: string; condition?: string; imageBase64?: string };
+  try {
+    body = JSON.parse(bodyStr);
+  } catch {
+    res.statusCode = 400;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ success: false, error: 'Malformed JSON payload.' }));
+    return;
+  }
+
+  const itemName = (body.itemName || '').trim();
+  const category = (body.category || 'General').trim();
+  const condition = (body.condition || 'Good / gently used').trim();
+
+  if (!itemName) {
+    res.statusCode = 400;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ success: false, error: 'Item name is required.' }));
+    return;
+  }
+
+  const recommendation = await getNextWorthRecommendation(itemName, category, condition);
+
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify({ success: true, data: fallbackRec }));
+  res.end(JSON.stringify({ success: true, data: recommendation }));
 }

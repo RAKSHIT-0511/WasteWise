@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import { validateImageBuffer, parseMatterLensResponse } from '../src/utils/matterlensParser';
+import { validateImageBuffer, parseMatterLensResponse } from '../src/utils/matterlensParser.ts';
+import type { MatterLensAnalysisResult } from '../src/utils/matterlensParser.ts';
 
 const SYSTEM_PROMPT = `You are MatterLens, an advanced optical waste material identification AI for the WasteWise platform.
 Analyze the provided image of a physical item or waste container.
@@ -67,6 +68,63 @@ async function callProvider(model: string, base64Data: string, mimeType: string,
   }
 }
 
+export type MatterLensOutcome =
+  | { ok: true; result: MatterLensAnalysisResult }
+  | { ok: false; status: number; error: string };
+
+/**
+ * Transport-free identification pipeline: validate, call Gemma, parse.
+ * The Vite dev middleware and the Vercel serverless function both call this, so
+ * local behaviour and deployed behaviour cannot drift apart.
+ */
+export async function identifyMaterial(imageBase64: unknown, declaredMime?: string): Promise<MatterLensOutcome> {
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  if (!apiKey) {
+    return {
+      ok: false,
+      status: 500,
+      error: 'MatterLens AI gateway is not configured. Missing API credentials on the server.',
+    };
+  }
+
+  if (!imageBase64 || typeof imageBase64 !== 'string') {
+    return { ok: false, status: 400, error: 'Missing imageBase64 in request body.' };
+  }
+
+  // Strip data URI prefix if present
+  const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z+]+;base64,/, '');
+
+  // Validate byte size and detect real magic bytes header
+  const validation = validateImageBuffer(cleanBase64, declaredMime);
+  if (!validation.valid) {
+    return { ok: false, status: 400, error: validation.error || 'Invalid image payload.' };
+  }
+
+  // Centrally configured Gemma model ID (never silently replaced)
+  const gemmaModel = process.env.GEMMA_MODEL || 'gemma-4-26b-a4b-it';
+
+  let rawModelOutput = '';
+  try {
+    rawModelOutput = await callProvider(gemmaModel, cleanBase64, validation.mimeType, apiKey);
+  } catch (gemmaErr) {
+    return {
+      ok: false,
+      status: 502,
+      error: `Gemma model inference failed on '${gemmaModel}': ${gemmaErr instanceof Error ? gemmaErr.message : 'Unknown provider error'}`,
+    };
+  }
+
+  try {
+    return { ok: true, result: parseMatterLensResponse(rawModelOutput, gemmaModel) };
+  } catch (parseErr) {
+    return {
+      ok: false,
+      status: 502,
+      error: parseErr instanceof Error ? parseErr.message : 'Failed to parse model identification payload.',
+    };
+  }
+}
+
 export async function handleMatterLensIdentify(req: IncomingMessage, res: ServerResponse): Promise<void> {
   // Enforce POST method
   if (req.method !== 'POST') {
@@ -114,50 +172,17 @@ export async function handleMatterLensIdentify(req: IncomingMessage, res: Server
         return;
       }
 
-      const { imageBase64, mimeType: declaredMime } = parsedBody;
-      if (!imageBase64 || typeof imageBase64 !== 'string') {
-        res.statusCode = 400;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ success: false, error: 'Missing imageBase64 in request body.' }));
+      const outcome = await identifyMaterial(parsedBody.imageBase64, parsedBody.mimeType);
+
+      res.setHeader('Content-Type', 'application/json');
+      if (!outcome.ok) {
+        res.statusCode = outcome.status;
+        res.end(JSON.stringify({ success: false, error: outcome.error }));
         return;
       }
-
-      // Strip data URI prefix if present
-      const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z+]+;base64,/, '');
-
-      // Validate byte size and detect real magic bytes header
-      const validation = validateImageBuffer(cleanBase64, declaredMime);
-      if (!validation.valid) {
-        res.statusCode = 400;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ success: false, error: validation.error }));
-        return;
-      }
-
-      const verifiedMimeType = validation.mimeType;
-
-      // Centrally configured Gemma model ID (never silently replaced)
-      const gemmaModel = process.env.GEMMA_MODEL || 'gemma-4-26b-a4b-it';
-
-      let rawModelOutput = '';
-      try {
-        rawModelOutput = await callProvider(gemmaModel, cleanBase64, verifiedMimeType, apiKey);
-      } catch (gemmaErr) {
-        res.statusCode = 502;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({
-          success: false,
-          error: `Gemma model inference failed on '${gemmaModel}': ${gemmaErr instanceof Error ? gemmaErr.message : 'Unknown provider error'}`
-        }));
-        return;
-      }
-
-      // Parse and structure JSON output
-      const result = parseMatterLensResponse(rawModelOutput, gemmaModel);
 
       res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({ success: true, result }));
+      res.end(JSON.stringify({ success: true, result: outcome.result }));
     } catch (err) {
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');

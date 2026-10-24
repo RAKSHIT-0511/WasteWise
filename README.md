@@ -151,6 +151,49 @@ npm run build
 
 ---
 
+## Deploying to Vercel
+
+`vite.config.ts` registers the gateway through Vite's `configureServer` hook, which runs **only in
+the dev server**. `vite build` emits static assets and no server, so a plain static deploy answers
+nothing on `/api/*` and every feature hangs on its loading state. Production therefore gets real
+serverless functions:
+
+| Route | File | Shared logic it calls |
+| :--- | :--- | :--- |
+| `GET /api/health` | `api/health.ts` | — |
+| `POST /api/matterlens/identify` | `api/matterlens/identify.ts` | `identifyMaterial` |
+| `POST /api/ecoverify/verify` | `api/ecoverify/verify.ts` | `buildEcoVerifyInput` + `verifyRecyclingRules` |
+| `POST /api/nextworth/recommend` | `api/nextworth/recommend.ts` | `getNextWorthRecommendation` |
+| `GET\|POST /api/pincode/lookup` | `api/pincode/lookup.ts` | `lookupIndianPincode` |
+
+Each function is a thin transport shim over a function in `server/`, and the dev middleware calls
+the same functions — so local and deployed behaviour cannot drift apart.
+
+`vercel.json` rewrites every non-`/api/` path to `/index.html`, which is what makes client-side
+routes such as `/matterlens` survive a refresh or a shared link instead of returning Vercel's 404.
+
+**Set these in the Vercel project** (Settings → Environment Variables), or MatterLens returns
+`500 — MatterLens AI gateway is not configured`:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMMA_MODEL=gemma-4-26b-a4b-it
+```
+
+Two platform limits worth knowing:
+
+- **Request body cap of 4.5 MB.** Base64 inflates an image by about a third, so uploads above
+  roughly 3.3 MB of raw image will be refused. The client still advertises a 5 MB limit, so either
+  lower that cap or compress before upload.
+- **Function duration.** `callProvider` waits up to 28 s for Gemma, which exceeds the default
+  function timeout, so `vercel.json` sets `maxDuration` to 60 s.
+
+Run `npm test` before deploying — `test/api-handlers.test.mjs` exercises the serverless handlers
+with a pre-parsed `req.body` (how Vercel delivers it) as well as a readable stream (how the dev
+middleware does), which is the exact difference that silently breaks a ported handler.
+
+---
+
 ## Security & Privacy Guarantees
 - **No Client Credential Exposure**: `GEMINI_API_KEY` is loaded strictly on the server-side Vite gateway and is never bundled in frontend assets.
 - **Server-Side Validation**: Magic byte inspection prevents arbitrary file type spoofing.
