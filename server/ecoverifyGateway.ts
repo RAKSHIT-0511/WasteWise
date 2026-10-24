@@ -1,6 +1,45 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import { verifyRecyclingRules } from './ecoverifyAdapter';
+import { verifyRecyclingRules } from './ecoverifyAdapter.ts';
 import type { EcoVerifyInput } from '../src/types/index.ts';
+
+export type EcoVerifyInputOutcome =
+  | { ok: true; input: EcoVerifyInput }
+  | { ok: false; status: number; error: string };
+
+/**
+ * Transport-free validation of an EcoVerify request body. Shared by the Vite dev
+ * middleware and the Vercel serverless function so both enforce the same limits.
+ */
+export function buildEcoVerifyInput(body: Partial<EcoVerifyInput>): EcoVerifyInputOutcome {
+  const country = typeof body.country === 'string' ? body.country.trim().slice(0, 100) : '';
+  const location = typeof body.location === 'string' ? body.location.trim().slice(0, 150) : '';
+  const itemName = typeof body.itemName === 'string' ? body.itemName.trim().slice(0, 150) : '';
+  const materialType = typeof body.materialType === 'string' ? body.materialType.trim().slice(0, 150) : '';
+  const condition = typeof body.condition === 'string' ? body.condition.trim().slice(0, 150) : '';
+  const details = typeof body.details === 'string' ? body.details.trim().slice(0, 300) : '';
+
+  if (!location) {
+    return { ok: false, status: 400, error: 'City, postcode, or campus location is required.' };
+  }
+  if (!itemName) {
+    return { ok: false, status: 400, error: 'Item name is required.' };
+  }
+  if (!materialType) {
+    return { ok: false, status: 400, error: 'Material type is required.' };
+  }
+
+  return {
+    ok: true,
+    input: {
+      country: country || 'United States',
+      location,
+      itemName,
+      materialType,
+      condition,
+      details,
+    },
+  };
+}
 
 export async function handleEcoVerify(req: IncomingMessage, res: ServerResponse): Promise<void> {
   // Enforce POST method
@@ -36,48 +75,18 @@ export async function handleEcoVerify(req: IncomingMessage, res: ServerResponse)
         return;
       }
 
-      // Input validation
-      const country = typeof body.country === 'string' ? body.country.trim().slice(0, 100) : '';
-      const location = typeof body.location === 'string' ? body.location.trim().slice(0, 150) : '';
-      const itemName = typeof body.itemName === 'string' ? body.itemName.trim().slice(0, 150) : '';
-      const materialType = typeof body.materialType === 'string' ? body.materialType.trim().slice(0, 150) : '';
-      const condition = typeof body.condition === 'string' ? body.condition.trim().slice(0, 150) : '';
-      const details = typeof body.details === 'string' ? body.details.trim().slice(0, 300) : '';
+      const built = buildEcoVerifyInput(body);
+      res.setHeader('Content-Type', 'application/json');
 
-      if (!location) {
-        res.statusCode = 400;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ success: false, error: 'City, postcode, or campus location is required.' }));
+      if (!built.ok) {
+        res.statusCode = built.status;
+        res.end(JSON.stringify({ success: false, error: built.error }));
         return;
       }
 
-      if (!itemName) {
-        res.statusCode = 400;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ success: false, error: 'Item name is required.' }));
-        return;
-      }
-
-      if (!materialType) {
-        res.statusCode = 400;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ success: false, error: 'Material type is required.' }));
-        return;
-      }
-
-      const input: EcoVerifyInput = {
-        country: country || 'United States',
-        location,
-        itemName,
-        materialType,
-        condition,
-        details,
-      };
-
-      const verification = verifyRecyclingRules(input);
+      const verification = verifyRecyclingRules(built.input);
 
       res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ success: true, data: verification }));
     } catch (err) {
       res.statusCode = 500;

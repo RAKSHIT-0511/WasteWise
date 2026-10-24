@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "node --experimental-strip-types --test test/parser.test.mjs test/ecoverify.test.mjs test/looptrace.test.mjs test/pincode.test.mjs test/nextworth.test.mjs",
+    "test": "node --experimental-strip-types --test test/parser.test.mjs test/ecoverify.test.mjs test/looptrace.test.mjs test/pincode.test.mjs test/nextworth.test.mjs test/api-handlers.test.mjs",
     "test:gemma": "node scripts/verify-gemma.mjs"
   },
   "dependencies": {
